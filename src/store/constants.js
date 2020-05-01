@@ -9,5 +9,5 @@ export default {
   API_LATEST,
   API_DETAIL,
   FETCH_START,
-  FETCH_END,
+  FETCH_END
 }
