@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <p>{{JSON.stringify(latest)}}</p>
+    <p>{{JSON.stringify(filmProps)}}</p>
     <p>{{loading ? 'loading ...' : 'not loading'}}</p>
-    <p>{{random}}</p>
-    <p>{{latest['original_language']}}</p>
+
     <LatestFilm
-      :overview="latest.overview"
-      :title="latest.title"
-      :poster-path="latest[poster_path]"
-      :release-date="latest[release_date]"
-      :video="latest[video]"
+      :overview="filmProps.overview"
+      :title="filmProps.title"
+      :id="filmProps.id"
+      :poster-path="filmProps['poster_path']"
+      :release-date="filmProps['release_date']"
+      :video="filmProps.video"
     />
   </div>
 </template>
@@ -24,9 +24,15 @@ export default {
   },
   data() {
     return {
-      latest: this.$store.state.latestFilm,
-      loading: this.$store.state.fetchStatus,
       random: 'random prop'
+    }
+  },
+  computed: {
+    filmProps() {
+      return this.$store.state.latestFilm
+    },
+    loading() {
+      return this.$store.state.fetchStatus
     }
   },
 
