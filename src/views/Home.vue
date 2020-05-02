@@ -36,9 +36,10 @@ export default {
     }
   },
 
-  created: function() {
+  created: async function() {
     console.log('created home')
-    this.$store.dispatch('fetchLatest')
+    await this.$store.dispatch('fetchLatest')
+    await this.$store.dispatch('fetchNowPlaying')
   }
 }
 </script>

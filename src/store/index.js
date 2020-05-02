@@ -44,6 +44,15 @@ export default new Vuex.Store({
         // catch error depending of status code response error
         console.log(error)
       }
+    },
+    fetchNowPlaying: async ({ commit }, payload) => {
+      payload = payload || 1
+      commit('FETCH_NOW_PLAYING_START')
+      const nowPlaying = await axios.get(
+        `movie/now_playing?api_key=${process.env.VUE_APP_API_KEY}&page=${payload}`
+      )
+      commit('FETCH_NOW_PLAYING_END')
+      commit(types.API_NOW_PLAYING, nowPlaying)
     }
   },
   modules: {}
