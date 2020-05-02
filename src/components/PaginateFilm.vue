@@ -1,5 +1,5 @@
 <template>
-  <div class="paginate">
+  <div class="paginate flex justify-center">
     <ul class="flex">
       <li class="py-2 px-3" :disabled="page <= 1 ? true : false ">Previous</li>
       <li class="p-2">{{page}}</li>
@@ -20,10 +20,10 @@ export default {
   },
   methods: {
     incrementPage() {
-      this.$store.dispatch('', this.page + 1)
+      this.$store.dispatch('fetchNowPlaying', this.page + 1)
     },
     decrementPage() {
-      this.$store.dispatch(''), this.page - 1
+      this.$store.dispatch('fetchNowPlaying'), this.page - 1
     }
   }
 }
