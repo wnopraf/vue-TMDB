@@ -2,15 +2,12 @@
   <div class="latest-film">
     <h3>{{title}}</h3>
     <figure v-if="posterPath">
-      <img :src="apiUrl + posterPath" alt />
+      <img :src="globalImagePosterPath + posterPath" alt />
     </figure>
     <p v-else>No poster avaliable</p>
 
     <p>{{overview}}</p>
-    <video
-      v-if="video"
-      :src="process.env.VUE_APP_API_URL + `movie/${id}?api_key=${process.env.VUE_APP_API_KEY}&append_to_response=videos`"
-    ></video>
+    <video v-if="video" :src=" apiUrl + `movie/${id}?api_key=${apiKey}&append_to_response=videos`"></video>
 
     <p v-if="releaseDate">{{releaseDate}}</p>
     <router-link :to="`/movie/${id}`">view film</router-link>
@@ -23,8 +20,17 @@ export default {
     title: {
       type: String
     },
+    globalImagePosterPath: {
+      type: String,
+      default: process.env.VUE_APP_IMG_URL_POSTER
+    },
     apiUrl: {
-      default: process.env.VUE_APP_IMG_URL_LOGO
+      type: String,
+      default: process.env.VUE_APP_API_URL
+    },
+    apiKey: {
+      type: String,
+      default: process.env.VUE_APP_API_URL
     },
     id: {
       type: Number

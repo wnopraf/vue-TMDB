@@ -1,7 +1,7 @@
 <template>
   <div class="film-item">
     <figure v-if="posterPath">
-      <img :src="process.env.VUE_APP_IMG_URL_LOGO + posterPath" alt />
+      <img :src=" globalImgLogoPath + posterPath" alt />
     </figure>
     <div class="film-item__info">
       <p>{{title}}</p>
@@ -15,6 +15,10 @@ export default {
   props: {
     title: {
       type: String
+    },
+    globalImgLogoPath: {
+      type: String,
+      default: process.env.VUE_APP_IMG_URL_LOGO
     },
     posterPath: {
       type: String
