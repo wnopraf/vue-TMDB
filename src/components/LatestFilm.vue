@@ -1,25 +1,46 @@
 <template>
   <div class="latest-film">
     <h3>{{title}}</h3>
-    <figure v-if="poster_path">
-      <img :src="poster_path" alt />
+    <figure v-if="posterPath">
+      <img :src="apiUrl + posterPath" alt />
     </figure>
     <p v-else>No poster avaliable</p>
 
     <p>{{overview}}</p>
-    <video v-if="video" :src="video"></video>
-    <p v-if="release-date">{{release_date}}</p>
+    <video
+      v-if="video"
+      :src="process.env.VUE_APP_API_URL + `movie/${id}?api_key=${process.env.VUE_APP_API_KEY}&append_to_response=videos`"
+    ></video>
+
+    <p v-if="releaseDate">{{releaseDate}}</p>
+    <router-link :to="`/movie/${id}`">view film</router-link>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    title: 'string',
-    overview: 'string',
-    poster_path: 'string',
-    release_date: 'string',
-    video: 'string'
+    title: {
+      type: String
+    },
+    apiUrl: {
+      default: process.env.VUE_APP_IMG_URL_LOGO
+    },
+    id: {
+      type: Number
+    },
+    overview: {
+      type: String
+    },
+    posterPath: {
+      type: String
+    },
+    releaseDate: {
+      type: String
+    },
+    video: {
+      type: Boolean
+    }
   }
 }
 </script>
