@@ -35,7 +35,7 @@ export default new Vuex.Store({
       try {
         commit('FETCH_START')
         const latestFilm = await axios.get(
-          `movie/latest?api_key=${process.env.VUE_APP_APY_KEY}`
+          `movie/latest?api_key=${process.env.VUE_APP_API_KEY}`
         )
         console.log(latestFilm, 'fetch latest')
         commit('FETCH_END')
