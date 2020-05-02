@@ -1,18 +1,38 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>{{JSON.stringify(latest)}}</p>
+    <p>{{loading ? 'loading ...' : 'not loading'}}</p>
+    <p>{{random}}</p>
+    <p>{{latest['original_language']}}</p>
+    <LatestFilm
+      :overview="latest.overview"
+      :title="latest.title"
+      :poster-path="latest[poster_path]"
+      :release-date="latest[release_date]"
+      :video="latest[video]"
+    />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import LatestFilm from '@/components/LatestFilm'
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    LatestFilm
+  },
+  data() {
+    return {
+      latest: this.$store.state.latestFilm,
+      loading: this.$store.state.fetchStatus,
+      random: 'random prop'
+    }
+  },
+
+  created: function() {
+    console.log('created home')
+    this.$store.dispatch('fetchLatest')
   }
 }
 </script>
