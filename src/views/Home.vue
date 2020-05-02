@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <p>{{JSON.stringify(filmProps)}}</p>
-    <p>{{loading ? 'loading ...' : 'not loading'}}</p>
+    <p>{{loadingLatestFilms ? 'loading ...' : 'not loading'}}</p>
 
     <LatestFilm
       :overview="filmProps.overview"
@@ -31,8 +31,11 @@ export default {
     filmProps() {
       return this.$store.state.latestFilm
     },
-    loading() {
+    loadingLatestFilms() {
       return this.$store.state.fetchStatus
+    },
+    loadingNowPlaying() {
+      return this.$store.state.nowPlaying
     }
   },
 
