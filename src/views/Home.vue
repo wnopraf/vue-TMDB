@@ -24,6 +24,7 @@
         </li>
       </ul>
     </div>
+    <Paginate-Film :page="nowPlaying.page" :total-pages="nowPlaying['total_pages']" />
   </div>
 </template>
 
