@@ -27,7 +27,6 @@ export default {
       this.$store.dispatch('fetchNowPlaying', { page: this.page + 1 })
     },
     decrementPage() {
-      console.log('decrement', this.page)
       this.$store.dispatch('fetchNowPlaying', { page: this.page - 1 })
     }
   }
