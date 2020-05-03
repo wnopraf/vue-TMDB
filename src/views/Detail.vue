@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="film-detail-view">
+    <Film-Detail />
   </div>
 </template>
 <script>
@@ -15,8 +15,11 @@ export default {
     FilmDetail
   },
   computed: {
-    film() {
-      return this.$store.state.FilmDetail
+    apiDetail() {
+      return this.$store.state.apiDetail
+    },
+    fetchApiDetailStatus() {
+      return this.$store.state.fetchApiDetailStatus
     }
   },
   created() {
