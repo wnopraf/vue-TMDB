@@ -1,17 +1,19 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>
     </div>
-    <router-view></router-view>
+    <section class="view-holer container mx-auto px-3">
+      <router-view></router-view>
+    </section>
+
     <footer>
       <section class="container mx-auto">footer text</section>
     </footer>
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 @import 'assets/styles/tailwind.postcss';
 
 #app {
@@ -21,7 +23,12 @@
   text-align: center;
   color: #2c3e50;
 }
-
+h1 {
+  @apply py-2 px-1 my-2 font-normal text-5xl;
+}
+h3 {
+  @apply py-2 px-1 my-2 font-normal text-3xl;
+}
 #nav {
   padding: 30px;
 }

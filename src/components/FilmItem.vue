@@ -5,7 +5,7 @@
     </figure>
     <div class="film-item__info">
       <p>{{title}}</p>
-      <router-link :to="`movie/${id}`">view film</router-link>
+      <router-link :to="`movie/${id}`" class="px-3 py-2 rounded-sm bg-blue-300">view film</router-link>
     </div>
     <p v-if="releaseDate">{{releaseDate}}</p>
   </div>

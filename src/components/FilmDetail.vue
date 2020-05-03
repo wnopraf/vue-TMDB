@@ -1,7 +1,7 @@
 <template>
   <div class="film-detail">
     <div class="film-detail__film-info">
-      <figure>
+      <figure class="flex justify-center">
         <img :src="globalImagePosterPath + posterPath" alt />
       </figure>
       <h1>{{title}}</h1>
@@ -10,28 +10,32 @@
     </div>
     <div class="cast">
       <ul>
-        <li v-for="(actor, key) in credits.cast" :key="key">
+        <li
+          v-for="(actor, key) in credits.cast"
+          :key="key"
+          class="flex flex-col sm:flex-row items-center justify-center py-4"
+        >
           <figure>
-            <img :src="globalImgLogoPath + actor.profilePath" alt />
+            <img v-if="actor['profile_path']" :src="globalImgLogoPath + actor['profile_path']" alt />
+            <div v-else class="img-replace flex justify-center items-center">
+              <p>profile avatar not avaliable</p>
+            </div>
           </figure>
-          <div class="cast__info">
-            <span>Actor Name</span>
-            <span>{{actor.name}}</span>
-            <span>Character name</span>
-            <span>{{actor.character}}</span>
+          <div class="cast__info sm:flex flex-wrap mt-3 sm:mt-0 ml-12 sm:w-1/2">
+            <span class="sm:w-1/2 block">Actor Name</span>
+            <span class="sm:w-1/2 block">{{actor.name}}</span>
+            <span class="sm:w-1/2 block">Character name</span>
+            <span class="sm:w-1/2 block">{{actor.character}}</span>
           </div>
         </li>
       </ul>
     </div>
-    <div class="film-detail__ratings">
-      <div class="film-detail__ratings__vote-rate">
+    <div class="film-detail__ratings mt-4">
+      <div class="film-detail__ratings__vote-rate flex justify-between sm:w-1/2 sm:mx-auto">
         <p>Vote count: {{voteCount}}</p>
         <p>Vote average: {{voteAverage}}</p>
       </div>
-      <p class="film-detail__ratigns__popularity">
-        <span>Popularity:</span>
-        <span>{{popularity}}</span>
-      </p>
+      <p class="film-detail__ratigns__popularity">Popularity: {{popularity}}</p>
     </div>
   </div>
 </template>
@@ -42,7 +46,7 @@ export default {
     title: {
       type: String
     },
-    releasDate: {
+    releaseDate: {
       type: String
     },
     overview: {
@@ -74,3 +78,10 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.img-replace {
+  max-width: 100%;
+  height: 231px;
+}
+</style>

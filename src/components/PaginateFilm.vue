@@ -23,10 +23,10 @@ export default {
     }
   },
   methods: {
-    incrementPage() {
+    incrementPage () {
       this.$store.dispatch('fetchNowPlaying', { page: this.page + 1 })
     },
-    decrementPage() {
+    decrementPage () {
       this.$store.dispatch('fetchNowPlaying', { page: this.page - 1 })
     }
   }
