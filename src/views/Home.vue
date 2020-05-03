@@ -32,11 +32,13 @@
 // @ is an alias to /src
 import LatestFilm from '@/components/LatestFilm'
 import FilmItem from '@/components/FilmItem'
+import PaginateFilm from '@/components/PaginateFilm'
 export default {
   name: 'Home',
   components: {
     LatestFilm,
-    FilmItem
+    FilmItem,
+    PaginateFilm
   },
   data() {
     return {
