@@ -1,9 +1,13 @@
 <template>
   <div class="paginate flex justify-center">
     <ul class="flex">
-      <li class="py-2 px-3" :disabled="page <= 1 ? true : false ">Previous</li>
+      <li class="py-2 px-3 cursor-pointer">
+        <button :disabled="page <= 1 ? true : false " @click="decrementPage">Previous</button>
+      </li>
       <li class="p-2">{{page}}</li>
-      <li class="py-2 px-3" :disabled="page >= totalPages ? ture : false">Next</li>
+      <li class="py-2 px-3 cursor-pointer">
+        <button :disabled="page >= totalPages ? true : false" @click="incrementPage">Next</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -20,10 +24,11 @@ export default {
   },
   methods: {
     incrementPage() {
-      this.$store.dispatch('fetchNowPlaying', this.page + 1)
+      this.$store.dispatch('fetchNowPlaying', { page: this.page + 1 })
     },
     decrementPage() {
-      this.$store.dispatch('fetchNowPlaying'), this.page - 1
+      console.log('decrement', this.page)
+      this.$store.dispatch('fetchNowPlaying', { page: this.page - 1 })
     }
   }
 }
