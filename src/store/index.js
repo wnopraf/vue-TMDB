@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import types from './constants'
-import { axios } from '../utils'
+import { axios, handleResError } from '../utils'
 
 Vue.use(Vuex)
 
@@ -42,6 +42,12 @@ export default new Vuex.Store({
     },
     [types.FETCH_API_DETAIL_START]: store => {
       store.fetchApiDetailStatus = false
+    },
+    [types.ERROR_401]: store => {
+      this.$router.push('401')
+    },
+    [types.ERROR_500]: store => {
+      this.$router.push('500')
     }
   },
   actions: {
@@ -56,7 +62,8 @@ export default new Vuex.Store({
         commit(types.API_LATEST, latestFilm)
       } catch (error) {
         // catch error depending of status code response error
-        console.log(error)
+        console.log('fetch_latest_error', error)
+        handleResError(error.response.status, commit)
       }
     },
     fetchNowPlaying: async ({ commit }, { page } = { page: 1 }) => {
@@ -71,6 +78,20 @@ export default new Vuex.Store({
       } catch (error) {
         // catch error depending of status code response error
         console.log(error, 'fetch_now_playing_error')
+        handleResError(error.response.status, commit)
+      }
+    },
+    fetchDetail: async ({ commit }, { id }) => {
+      try {
+        commit(types.FETCH_API_DETAIL_START)
+        const detailPageData = await axios.get(
+          `movie/${id}/${process.env.VUE_APP_API_KEY}`
+        )
+        commit(types.FETCH_API_DETAIL_END)
+        commit(types.API_DETAIL, detailPageData)
+      } catch (error) {
+        console.log('fetchDetail', error)
+        handleResError(error.response.status, commit)
       }
     }
   },
