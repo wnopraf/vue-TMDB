@@ -62,7 +62,7 @@ export default {
     credits: {
       type: Object
     },
-    voteCout: {
+    voteCount: {
       type: Number
     },
     voteAverage: {

@@ -1,6 +1,15 @@
 <template>
   <div class="film-detail-view">
-    <Film-Detail />
+    <Film-Detail
+      :overview="apiDetail.overview"
+      :title="apiDetail.title"
+      :release-date="apiDetail['release_date']"
+      :poster-path="apiDetail['poster_path']"
+      :vote-count="apiDetail['vote_count']"
+      :vote-average="apiDetail['vote_average']"
+      :popularity="popularity"
+      :credits="apiDetail.credits"
+    />
   </div>
 </template>
 <script>
