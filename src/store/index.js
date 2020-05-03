@@ -84,7 +84,7 @@ export default new Vuex.Store({
     fetchDetail: async ({ commit }, { id }) => {
       try {
         commit(types.FETCH_API_DETAIL_START)
-        const detailPageData = await axios.get(
+        const { data: detailPageData } = await axios.get(
           `movie/${id}/${process.env.VUE_APP_API_KEY}&append_to_response=credits`
         )
         commit(types.FETCH_API_DETAIL_END)
