@@ -40,7 +40,7 @@ export default new Vuex.Store({
     [types.FETCH_API_DETAIL_START]: store => {
       store.fetchApiDetailStatus = true
     },
-    [types.FETCH_API_DETAIL_START]: store => {
+    [types.FETCH_API_DETAIL_END]: store => {
       store.fetchApiDetailStatus = false
     },
     [types.ERROR_401]: store => {
@@ -63,7 +63,7 @@ export default new Vuex.Store({
       } catch (error) {
         // catch error depending of status code response error
         console.log('fetch_latest_error', error)
-        handleResError(error.response.status, commit)
+        handleResError(error.response.status, commit, types)
       }
     },
     fetchNowPlaying: async ({ commit }, { page } = { page: 1 }) => {
@@ -78,19 +78,20 @@ export default new Vuex.Store({
       } catch (error) {
         // catch error depending of status code response error
         console.log(error, 'fetch_now_playing_error')
-        handleResError(error.response.status, commit)
+        handleResError(error.response.status, commit, types)
       }
     },
     fetchDetail: async ({ commit }, { id }) => {
       try {
         commit(types.FETCH_API_DETAIL_START)
         const { data: detailPageData } = await axios.get(
-          `movie/${id}/${process.env.VUE_APP_API_KEY}&append_to_response=credits`
+          `movie/${id}?api_key=${process.env.VUE_APP_API_KEY}&append_to_response=credits`
         )
+        console.log('apidetail data', detailPageData)
         commit(types.FETCH_API_DETAIL_END)
         commit(types.API_DETAIL, detailPageData)
       } catch (error) {
-        console.log('fetchDetail', error)
+        console.log('fetchDetailError', error, types)
         handleResError(error.response.status, commit)
       }
     }
