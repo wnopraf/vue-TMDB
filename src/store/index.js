@@ -11,7 +11,8 @@ export default new Vuex.Store({
     nowPlaying: [],
     apiDetail: {},
     fetchLatestStatus: false,
-    fetchNowPlayingStatus: false
+    fetchNowPlayingStatus: false,
+    fetchApiDetailStatus: false
   },
   mutations: {
     [types.API_LATEST]: (store, { data }) => {
@@ -35,6 +36,12 @@ export default new Vuex.Store({
     },
     [types.FETCH_NOW_PLAYING_END]: store => {
       store.fetchNowPlayingStatus = false
+    },
+    [types.FETCH_API_DETAIL_START]: store => {
+      store.fetchApiDetailStatus = true
+    },
+    [types.FETCH_API_DETAIL_START]: store => {
+      store.fetchApiDetailStatus = false
     }
   },
   actions: {
