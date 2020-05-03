@@ -2,7 +2,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/'
 
-function handleResError(statusCode, commit) {
+function handleResError (statusCode, commit, types) {
   switch (statusCode) {
     case 500:
       return commit(types.ERROR_500)
