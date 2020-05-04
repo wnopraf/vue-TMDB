@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <p>{{JSON.stringify(filmProps)}}</p>
-    <p>{{loadingLatestFilms ? 'loading ...' : 'not loading'}}</p>
+    <p v-if="loadingLatestFilms">Loading ...</p>
 
     <LatestFilm
+      v-else
       :overview="filmProps.overview"
       :title="filmProps.title"
       :id="filmProps.id"
@@ -40,27 +40,27 @@ export default {
     FilmItem,
     PaginateFilm
   },
-  data () {
+  data() {
     return {
       random: 'random prop'
     }
   },
   computed: {
-    filmProps () {
+    filmProps() {
       return this.$store.state.latestFilm
     },
-    loadingLatestFilms () {
+    loadingLatestFilms() {
       return this.$store.state.fetchLatestStatus
     },
-    loadingNowPlaying () {
+    loadingNowPlaying() {
       return this.$store.state.loadingNowPlaying
     },
-    nowPlaying () {
+    nowPlaying() {
       return this.$store.state.nowPlaying
     }
   },
 
-  created: async function () {
+  created: async function() {
     console.log('created home')
     await this.$store.dispatch('fetchLatest')
     await this.$store.dispatch('fetchNowPlaying')

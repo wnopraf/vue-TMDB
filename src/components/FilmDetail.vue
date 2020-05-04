@@ -1,5 +1,5 @@
 <template>
-  <div class="film-detail">
+  <div class="film-detail mt-20">
     <div class="film-detail__film-info">
       <figure class="flex justify-center">
         <img :src="globalImagePosterPath + posterPath" alt />
@@ -8,7 +8,7 @@
       <p>{{overview}}</p>
       <p>Release date: {{releaseDate}}</p>
     </div>
-    <div class="cast">
+    <div class="cast mt-16">
       <ul>
         <li
           v-for="(actor, key) in credits.cast"
@@ -31,11 +31,13 @@
       </ul>
     </div>
     <div class="film-detail__ratings mt-4">
-      <div class="film-detail__ratings__vote-rate flex justify-between sm:w-1/2 sm:mx-auto">
-        <p>Vote count: {{voteCount}}</p>
-        <p>Vote average: {{voteAverage}}</p>
+      <div class="film-detail__ratings__vote-rate sm:flex sm:justify-around">
+        <p class="votes mb-3 sm:mb-0">Vote count: {{voteCount}}</p>
+        <p class="votes">Vote average: {{voteAverage}}</p>
       </div>
-      <p class="film-detail__ratigns__popularity">Popularity: {{popularity}}</p>
+      <p class="film-detail__ratigns__popularity mt-6 flex justify-center">
+        <span class="votes">Popularity: {{popularity}}</span>
+      </p>
     </div>
   </div>
 </template>
@@ -83,5 +85,8 @@ export default {
 .img-replace {
   max-width: 100%;
   height: 231px;
+}
+.votes {
+  @apply px-3 py-2 bg-yellow-500 text-gray-700 font-bold rounded-sm;
 }
 </style>
