@@ -37,7 +37,7 @@ export default {
   },
   created() {
     console.log('created detail view', this.$route.params)
-    this.$store.dispatch('fetchDetail', { id: this.$route.params.id })
+    this.$store.dispatch('fetchDetail', { id: this.id })
   }
 }
 </script>
