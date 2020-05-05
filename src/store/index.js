@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import types from './constants'
-import { axios, handleResError } from '../utils'
+import { axios } from '../utils'
 
 Vue.use(Vuex)
 
@@ -46,48 +46,31 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchLatest({ commit }) {
-      try {
-        commit(types.FETCH_LATEST_START)
-        const latestFilm = await axios.get(
-          `movie/latest?api_key=${process.env.VUE_APP_API_KEY}`
-        )
-        console.log(latestFilm, 'fetch latest')
-        commit(types.FETCH_LATEST_END)
-        commit(types.API_LATEST, latestFilm)
-      } catch (error) {
-        // catch error depending of status code response error
-        console.log('fetch_latest_error', error)
-        handleResError(error.response.status, commit, types)
-      }
+      commit(types.FETCH_LATEST_START)
+      const latestFilm = await axios.get(
+        `movie/latest?api_key=${process.env.VUE_APP_API_KEY}`
+      )
+      console.log(latestFilm, 'fetch latest')
+      commit(types.FETCH_LATEST_END)
+      commit(types.API_LATEST, latestFilm)
     },
     async fetchNowPlaying({ commit }, { page } = { page: 1 }) {
-      try {
-        commit(types.FETCH_NOW_PLAYING_START)
-        const { data: nowPlaying } = await axios.get(
-          `movie/now_playing?api_key=${process.env.VUE_APP_API_KEY}&page=${page}`
-        )
-        console.log(nowPlaying, 'nowplaying')
-        commit(types.FETCH_NOW_PLAYING_END)
-        commit(types.API_NOW_PLAYING, nowPlaying)
-      } catch (error) {
-        // catch error depending of status code response error
-        console.log(error, 'fetch_now_playing_error')
-        handleResError(error.response.status, commit, types)
-      }
+      commit(types.FETCH_NOW_PLAYING_START)
+      const { data: nowPlaying } = await axios.get(
+        `movie/now_playing?api_key=${process.env.VUE_APP_API_KEY}&page=${page}`
+      )
+      console.log(nowPlaying, 'nowplaying')
+      commit(types.FETCH_NOW_PLAYING_END)
+      commit(types.API_NOW_PLAYING, nowPlaying)
     },
     async fetchDetail({ commit }, { id }) {
-      try {
-        commit(types.FETCH_API_DETAIL_START)
-        const { data: detailPageData } = await axios.get(
-          `movie/${id}?api_key=${process.env.VUE_APP_API_KEY}&append_to_response=credits`
-        )
-        console.log('apidetail data', detailPageData)
-        commit(types.FETCH_API_DETAIL_END)
-        commit(types.API_DETAIL, detailPageData)
-      } catch (error) {
-        console.log('fetchDetailError', error, types)
-        handleResError(error.response.status, commit)
-      }
+      commit(types.FETCH_API_DETAIL_START)
+      const { data: detailPageData } = await axios.get(
+        `movie/${id}?api_key=${process.env.VUE_APP_API_KEY}&append_to_response=credits`
+      )
+      console.log('apidetail data', detailPageData)
+      commit(types.FETCH_API_DETAIL_END)
+      commit(types.API_DETAIL, detailPageData)
     }
   },
   modules: {}
