@@ -2,7 +2,7 @@
   <div id="app">
     <section class="text-center py-48 bg-blue-300 text-gray-700">
       <h1 class="uppercase text-6xl">tmdv app</h1>
-      <small>the movie database</small>
+      <small class="capitalize">the movie database</small>
     </section>
     <nav class="bg-blue-350 text-gray-700">
       <div class="nav-wrapper text-left font-bold">
@@ -18,7 +18,7 @@
 
     <footer class="py-20 mt-12 bg-gray-700 text-blue-200">
       <section class="container mx-auto">
-        <h3 class="font-bold">tvmd©</h3>
+        <h3 class="font-bold uppercase">tvdm©</h3>
       </section>
     </footer>
   </div>
