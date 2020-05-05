@@ -17,6 +17,7 @@
 </template>
 <script>
 import FilmDetail from '@/components/FilmDetail'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Detail',
   props: {
@@ -28,16 +29,14 @@ export default {
     FilmDetail
   },
   computed: {
-    apiDetail() {
-      return this.$store.state.apiDetail
-    },
-    fetchApiDetailStatus() {
-      return this.$store.state.fetchApiDetailStatus
-    }
+    ...mapState(['apiDetail', 'fetchApiDetailStatus'])
   },
   created() {
     console.log('created detail view', this.$route.params)
-    this.$store.dispatch('fetchDetail', { id: this.id })
+    this.fetchDetail({ id: this.id })
+  },
+  methods: {
+    ...mapActions(['fetchDetail'])
   }
 }
 </script>
