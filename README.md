@@ -1,4 +1,4 @@
-# vue-tmdb
+# vue-TMDB
 
 Vue app that shows all the latest info about the latest movies, as well as let the user rate and create his own watchlists. All of that according to [the Movie Database App](https://github.com/florinpop17/app-ideas/blob/master/Projects/3-Advanced/Movie-App.md) requirements from the fantastic [app ideas repo](https://github.com/florinpop17/app-ideas/blob/master/Projects/3-Advanced)
 
