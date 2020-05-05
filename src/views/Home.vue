@@ -33,6 +33,7 @@
 import LatestFilm from '@/components/LatestFilm'
 import FilmItem from '@/components/FilmItem'
 import PaginateFilm from '@/components/PaginateFilm'
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -46,22 +47,17 @@ export default {
     }
   },
   computed: {
-    filmProps() {
-      return this.$store.state.latestFilm
-    },
-    loadingLatestFilms() {
-      return this.$store.state.fetchLatestStatus
-    },
-    loadingNowPlaying() {
-      return this.$store.state.loadingNowPlaying
-    },
-    nowPlaying() {
-      return this.$store.state.nowPlaying
-    }
+    ...mapState({
+      filmProps: state => state.latestFilm,
+      loadingLatestFilms: state => state.fetchLatestStatus,
+
+      loadingNowPlaying: state => state.loadingNowPlaying,
+
+      nowPlaying: state => state.nowPlaying
+    })
   },
 
   created: async function() {
-    console.log('created home')
     await this.$store.dispatch('fetchLatest')
     await this.$store.dispatch('fetchNowPlaying')
   }
