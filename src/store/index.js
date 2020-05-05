@@ -15,43 +15,37 @@ export default new Vuex.Store({
     fetchApiDetailStatus: false
   },
   mutations: {
-    [types.API_LATEST]: (store, { data }) => {
+    [types.API_LATEST](store, { data }) {
       store.latestFilm = data
       console.log('latest store', store.latestFilm)
     },
-    [types.API_NOW_PLAYING]: (store, payload) => {
+    [types.API_NOW_PLAYING](store, payload) {
       store.nowPlaying = payload
     },
-    [types.API_DETAIL]: (store, payload) => {
+    [types.API_DETAIL](store, payload) {
       store.apiDetail = payload
     },
-    [types.FETCH_LATEST_END]: store => {
+    [types.FETCH_LATEST_END](store) {
       store.fetchLatestStatus = false
     },
-    [types.FETCH_LATEST_START]: store => {
+    [types.FETCH_LATEST_START](store) {
       store.fetchLatestStatus = true
     },
-    [types.FETCH_NOW_PLAYING_START]: store => {
+    [types.FETCH_NOW_PLAYING_START](store) {
       store.fetchNowPlayingStatus = true
     },
-    [types.FETCH_NOW_PLAYING_END]: store => {
+    [types.FETCH_NOW_PLAYING_END](store) {
       store.fetchNowPlayingStatus = false
     },
-    [types.FETCH_API_DETAIL_START]: store => {
+    [types.FETCH_API_DETAIL_START](store) {
       store.fetchApiDetailStatus = true
     },
-    [types.FETCH_API_DETAIL_END]: store => {
+    [types.FETCH_API_DETAIL_END](store) {
       store.fetchApiDetailStatus = false
-    },
-    [types.ERROR_401]: store => {
-      this.$router.push('401')
-    },
-    [types.ERROR_500]: store => {
-      this.$router.push('500')
     }
   },
   actions: {
-    fetchLatest: async ({ commit }) => {
+    async fetchLatest({ commit }) {
       try {
         commit(types.FETCH_LATEST_START)
         const latestFilm = await axios.get(
@@ -66,7 +60,7 @@ export default new Vuex.Store({
         handleResError(error.response.status, commit, types)
       }
     },
-    fetchNowPlaying: async ({ commit }, { page } = { page: 1 }) => {
+    async fetchNowPlaying({ commit }, { page } = { page: 1 }) {
       try {
         commit(types.FETCH_NOW_PLAYING_START)
         const { data: nowPlaying } = await axios.get(
@@ -81,7 +75,7 @@ export default new Vuex.Store({
         handleResError(error.response.status, commit, types)
       }
     },
-    fetchDetail: async ({ commit }, { id }) => {
+    async fetchDetail({ commit }, { id }) {
       try {
         commit(types.FETCH_API_DETAIL_START)
         const { data: detailPageData } = await axios.get(
