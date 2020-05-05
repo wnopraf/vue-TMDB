@@ -33,7 +33,7 @@
 import LatestFilm from '@/components/LatestFilm'
 import FilmItem from '@/components/FilmItem'
 import PaginateFilm from '@/components/PaginateFilm'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -58,8 +58,11 @@ export default {
   },
 
   created: async function() {
-    await this.$store.dispatch('fetchLatest')
-    await this.$store.dispatch('fetchNowPlaying')
+    await this.fetchLatest()
+    await this.fetchNowPlaying()
+  },
+  methods: {
+    ...mapActions(['fetchLatest', 'fetchNowPlaying'])
   }
 }
 </script>
